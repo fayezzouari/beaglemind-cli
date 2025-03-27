@@ -1,0 +1,6 @@
+.venv
+beaglemind/.env
+beaglemind_cli.egg-info
+beaglemind.egg-info
+build
+data
