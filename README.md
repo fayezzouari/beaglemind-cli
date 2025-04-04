@@ -157,10 +157,6 @@ This project is part of a Google Summer of Code initiative for BeagleBoard. Curr
 3. Laying groundwork for future fine-tuning on BeagleBoard-specific data
 4. Developing the concept for eventual fine-tuned LLM hosting
 
-## License
-
-[Specify your license here]
-
 ## Contact
 
 For questions or issues, please contact Fayez Zouari at fayez.zouari@insat.ucar.tn.
