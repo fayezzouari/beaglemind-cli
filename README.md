@@ -32,7 +32,7 @@ Before installation, ensure you have:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/beaglemind-cli.git
+git clone https://github.com/fayezzouari/beaglemind-cli.git
 cd beaglemind-cli
 ```
 
