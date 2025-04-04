@@ -131,7 +131,7 @@ beaglemind-cli/
 │   ├── beagleenv.py         # Environment variable management
 │   ├── db_repair.py         # Vector database repair utilities
 │   ├── embedding.py         # Embedding model implementations
-│    ├── .env                    # API keys and configuration (create this)
+│   ├── .env                    # API keys and configuration (create this)
 │   └── data/
 │       └── vectordb/        # Vector database storage 
 ├── requirements.txt        # Package dependencies
