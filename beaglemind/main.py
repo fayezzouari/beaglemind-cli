@@ -18,6 +18,7 @@ from langchain_core.runnables import RunnablePassthrough
 # Other necessary imports
 from langchain_groq import ChatGroq
 from langchain_chroma import Chroma
+from beaglemind.db_repair import VectorDBRepair
 from beaglemind.embedding import AzureOpenAIEmbeddings, JinaAIEmbeddings
 from beaglemind.beagleenv import BeagleEnv
 
@@ -76,7 +77,6 @@ class BeagleMindAgent:
                         for thread_id, chat_history in raw_memory.items()
                     }
             except Exception as e:
-                # Instead of logging an error, log a warning and start fresh
                 logging.warning("Conversation memory file is malformed. Starting with an empty memory.")
                 self.conversation_memory = {}
         else:
@@ -87,7 +87,6 @@ class BeagleMindAgent:
         if self.thread_id_file.exists():
             self.thread_id = self.thread_id_file.read_text().strip()
         else:
-            import uuid
             self.thread_id = f"session_{uuid.uuid4().hex[:8]}"
             self.thread_id_file.write_text(self.thread_id)
 
@@ -103,52 +102,9 @@ class BeagleMindAgent:
             
         self.embeddings = AzureOpenAIEmbeddings()
         
-        # Validate database path
+        # Database initialization with enhanced recovery
         db_path = Path(vectordb_path)
-        if not db_path.exists():
-            logging.warning(f"Vector database directory does not exist at {db_path}. Creating it.")
-            db_path.mkdir(parents=True, exist_ok=True)
-        
-        sqlite_file = db_path / "chroma.sqlite3"
-        if sqlite_file.exists() and sqlite_file.stat().st_size == 0:
-            logging.warning(f"SQLite file exists but is empty at {sqlite_file}. Removing and recreating.")
-            sqlite_file.unlink()
-        
-        try:
-            # Initialize the vector database with proper error handling
-            logging.info(f"Connecting to Chroma DB at {vectordb_path}")
-            self.vectordb = Chroma(
-                persist_directory=str(db_path),
-                embedding_function=self.embeddings,
-            )
-            
-            # Check if the DB is usable by performing a test query
-            try:
-                self.vectordb.get(include=[], limit=1)
-                logging.info("Successfully connected to vector database")
-            except Exception as e:
-                if "file is not a database" in str(e):
-                    logging.error(f"Database file is corrupted: {e}")
-                    logging.info("Attempting to recreate the database")
-                    if sqlite_file.exists():
-                        sqlite_file.unlink()
-                    self.vectordb = Chroma(
-                        persist_directory=str(db_path),
-                        embedding_function=self.embeddings,
-                    )
-                else:
-                    raise
-                
-        except Exception as e:
-            logging.error(f"Failed to initialize vector database: {e}")
-            raise ValueError(f"Vector database initialization failed: {e}")
-        
-        # Create retriever with specific configuration
-        self.retriever = self.vectordb.as_retriever(
-            search_kwargs={
-                "k": 10,  # Retrieve top 10 most relevant documents
-            }
-        )
+        self._initialize_vector_db(db_path)
         
         # Initialize LLM
         self.llm = ChatGroq(
@@ -160,6 +116,64 @@ class BeagleMindAgent:
         # Create the graph
         self.graph = self.create_graph()
         self.conversation_timeout = 3600  # 1 hour timeout for conversations
+    
+    def _initialize_vector_db(self, db_path):
+        """Initialize vector database with robust error handling and recovery"""
+        sqlite_file = db_path / "chroma.sqlite3"
+        
+        # First, attempt to validate the existing database
+        if VectorDBRepair.validate_database(db_path):
+            try:
+                self._connect_to_db(db_path)
+                return
+            except Exception as e:
+                logging.error(f"Database validation passed but connection failed: {e}")
+                # Continue to repair
+        
+        # If we reached here, the database needs repair
+        logging.info("Attempting database repair...")
+        repair_success = VectorDBRepair.repair_database(db_path)
+        
+        if repair_success:
+            try:
+                self._connect_to_db(db_path)
+                return
+            except Exception as e:
+                logging.error(f"Database repair succeeded but connection still failed: {e}")
+                # Last resort: clean install
+        
+        # If repair didn't work, try clean install
+        logging.warning("Attempting clean database installation...")
+        clean_success = VectorDBRepair.clean_install(db_path)
+        
+        if clean_success:
+            try:
+                self._connect_to_db(db_path)
+                return
+            except Exception as e:
+                logging.error(f"Clean installation failed: {e}")
+                raise ValueError(f"Vector database initialization failed after all recovery attempts: {e}")
+        else:
+            raise ValueError("Failed to initialize vector database. All recovery attempts failed.")
+    
+    def _connect_to_db(self, db_path):
+        """Establish connection to the vector database"""
+        logging.info(f"Connecting to Chroma DB at {db_path}")
+        self.vectordb = Chroma(
+            persist_directory=str(db_path),
+            embedding_function=self.embeddings,
+        )
+        
+        # Verify connection with a test query
+        self.vectordb.get(include=[], limit=1)
+        logging.info("Successfully connected to vector database")
+        
+        # Create retriever
+        self.retriever = self.vectordb.as_retriever(
+            search_kwargs={
+                "k": 10,  # Retrieve top 10 most relevant documents
+            }
+        )
     
     def retrieve_relevant_context(self, query: str) -> list[str]:
         """External method to retrieve context with enhanced error handling."""
@@ -270,7 +284,6 @@ class BeagleMindAgent:
         def generate_response(state: ChatState):
             messages = state["messages"]
             response = self.llm.invoke(messages)
-            click.echo(response)
             return {
                 "messages": state["messages"] + [response],
                 "chat_history": state.get("chat_history", []) + [messages[-1], response],
@@ -375,7 +388,6 @@ def chat(prompt, log, thread):
         result = agent.invoke(chat_content, thread_id=thread or _current_thread)
         _current_thread = result["thread_id"]
         click.echo(f"BeagleMind: {result['response']}")
-        click.echo(f"(Thread ID: {_current_thread})")
     
     except Exception as e:
         click.echo(f"Error during chat: {e}")

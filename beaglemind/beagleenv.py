@@ -1,171 +1,112 @@
-import time
-from openai import AzureOpenAI
 import os
+import logging
+from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
 
-import requests
-from langchain.embeddings.base import Embeddings
-import time
-from beaglemind.beagleenv import BeagleEnv
-
-# Initialize as None to be instantiated later
-openai_client = None
-
-def connect_openai():
-    global openai_client
-    BeagleEnv.load_env_file()
-    if openai_client is None:
-        openai_client = AzureOpenAI(
-            api_key=BeagleEnv.get_env("OPENAI_API_KEY"),
-            api_version=BeagleEnv.get_env("OPENAI_API_VERSION"),
-            azure_endpoint=BeagleEnv.get_env("OPENAI_AZURE_ENDPOINT"),
-        )
-    return openai_client
-
-def get_openai_client():
-    return connect_openai()
-
-def get_embeddings(text: str):
+class BeagleEnv:
     """
-    Get embeddings for a given text using the OpenAI embedding model.
-    :param text: The text to embed
-    :return: The embeddings as a list of floats
+    Utility class for managing environment variables for BeagleMind applications.
+    Provides methods to load, access, and validate environment variables from .env files.
     """
-    client = get_openai_client()
-    # Get embeddings
-    response = client.embeddings.create(
-        input=text,
-        model="text-embedding-ada-002"
-    )
-    return response.data[0].embedding
-
-
-
-class AzureOpenAIEmbeddings:
-    """Wrapper for OpenAI embeddings to match LangChain interface"""
     
-    def __init__(self):
-        # Use the imported functions to access the client
-        self.client = get_openai_client()
+    _env_loaded = False
     
-    def embed_documents(self, texts):
-        """Create embeddings for a list of documents"""
-        results = []
-        # Process in smaller batches to avoid rate limits
-        batch_size = 16  # Adjust as needed
-        for i in range(0, len(texts), batch_size):
-            batch = texts[i:i+batch_size]
-            batch_embeddings = [get_embeddings(text) for text in batch]
-            results.extend(batch_embeddings)
-            if i + batch_size < len(texts):
-                time.sleep(0.5)  # Avoid rate limiting
-        return results
-    
-    def embed_query(self, text):
-        """Create embedding for a single query"""
-        return get_embeddings(text)
-
-
-
-class JinaAIEmbeddings(Embeddings):
-    def __init__(self, api_key, model="jina-clip-v2", dimensions=1024):
-        self.api_key = api_key
-        self.model = model
-        self.dimensions = dimensions
-        self.base_url = 'https://api.jina.ai/v1/embeddings'
-        self.max_retries = 3
-        self.retry_delay = 2
-    
-    def _get_embeddings(self, texts):
-        """Helper function to get embeddings with retry logic and error handling"""
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {self.api_key}'
-        }
+    @classmethod
+    def load_env_file(cls, env_path=None):
+        """
+        Load environment variables from a .env file.
         
-        data = {
-            "model": self.model,
-            "dimensions": self.dimensions,
-            "normalized": True,
-            "embedding_type": "float",
-            "input": texts
-        }
+        Args:
+            env_path (str, optional): Path to the .env file. If None, will search for .env files.
         
-        for attempt in range(self.max_retries):
-            try:
-                response = requests.post(self.base_url, headers=headers, json=data)
-                
-                # Debug the API response
-                if response.status_code != 200:
-                    print(f"API Error: Status code {response.status_code}")
-                    print(f"Response: {response.text}")
-                    if attempt < self.max_retries - 1:
-                        print(f"Retrying in {self.retry_delay} seconds...")
-                        time.sleep(self.retry_delay)
-                        continue
-                    else:
-                        raise ValueError(f"API error after {self.max_retries} retries: {response.text}")
-                
-                # Try to parse the JSON response
-                response_json = response.json()
-                
-                # Check if 'data' key exists in the response
-                if 'data' not in response_json:
-                    print(f"API Response format error: 'data' key missing")
-                    print(f"Response: {response_json}")
-                    
-                    # If there's an error message, return it
-                    if 'error' in response_json:
-                        raise ValueError(f"API returned error: {response_json['error']}")
-                    
-                    # Handle potential different response formats
-                    if 'embeddings' in response_json:
-                        return response_json['embeddings']
-                    
-                    # If this is just a single embedding
-                    if 'embedding' in response_json:
-                        return [response_json['embedding']]
-                    
-                    # As a fallback, check if the response is directly a list of embeddings
-                    if isinstance(response_json, list) and all(isinstance(item, list) for item in response_json):
-                        return response_json
-                    
-                    raise ValueError(f"Unexpected API response format: {response_json}")
-                
-                # Normal case - extract embeddings from data field
-                return [item['embedding'] for item in response_json['data']]
+        Returns:
+            bool: True if environment variables were loaded successfully, False otherwise.
+        """
+        if cls._env_loaded:
+            logging.info("Environment variables already loaded")
+            return True
             
-            except requests.exceptions.RequestException as e:
-                if attempt < self.max_retries - 1:
-                    print(f"Request error: {e}. Retrying in {self.retry_delay} seconds...")
-                    time.sleep(self.retry_delay)
-                else:
-                    raise ValueError(f"Request failed after {self.max_retries} retries: {e}")
-    
-    def embed_documents(self, texts):
-        """Embeds multiple texts at once (for Chroma compatibility)"""
-        if not texts:
-            return []
-        
-        # Split into smaller batches if needed (Jina API typically has limits)
-        batch_size = 100  # Adjust based on API limits
-        all_embeddings = []
-        
-        for i in range(0, len(texts), batch_size):
-            batch = texts[i:i+batch_size]
-            print(f"Embedding batch {i//batch_size + 1}/{(len(texts) + batch_size - 1)//batch_size} ({len(batch)} texts)")
-            batch_embeddings = self._get_embeddings(batch)
-            all_embeddings.extend(batch_embeddings)
+        try:
+            # If path is provided, use it; otherwise find .env file
+            if env_path:
+                env_file = Path(env_path)
+                if not env_file.exists():
+                    logging.warning(f"Specified .env file not found at {env_path}")
+                    return False
+                env_path = str(env_file)
+            else:
+                env_path = find_dotenv(usecwd=True)
+                if not env_path:
+                    logging.warning("No .env file found in current directory or parent directories")
+                    return False
             
-            # Sleep briefly between batches to avoid rate limits
-            if i + batch_size < len(texts):
-                time.sleep(0.5)
-        print(all_embeddings)
-        return all_embeddings
+            # Load the environment variables
+            loaded = load_dotenv(env_path)
+            if loaded:
+                logging.info(f"Environment variables loaded from {env_path}")
+                cls._env_loaded = True
+                return True
+            else:
+                logging.warning(f"Failed to load environment variables from {env_path}")
+                return False
+                
+        except Exception as e:
+            logging.error(f"Error loading environment variables: {e}")
+            return False
     
-    def embed_query(self, text):
-        """Embeds a single query text"""
-        result = self.embed_documents([text])
-        print("result", result)
-        if result:
-            return result[0]
-        return []
+    @classmethod
+    def get_env(cls, var_name, default=None):
+        """
+        Get an environment variable with optional default value.
+        
+        Args:
+            var_name (str): Name of the environment variable to retrieve
+            default: Default value to return if the variable is not found
+            
+        Returns:
+            The value of the environment variable or the default value
+        """
+        if not cls._env_loaded:
+            cls.load_env_file()
+            
+        return os.environ.get(var_name, default)
+    
+    @classmethod
+    def validate_required_env(cls, required_vars):
+        """
+        Validate that all required environment variables are present.
+        
+        Args:
+            required_vars (list): List of required environment variable names
+            
+        Returns:
+            tuple: (bool, list) - Success status and list of missing variables
+        """
+        if not cls._env_loaded:
+            cls.load_env_file()
+            
+        missing = []
+        for var in required_vars:
+            if not cls.get_env(var):
+                missing.append(var)
+                
+        return len(missing) == 0, missing
+    
+    @classmethod
+    def get_env_or_raise(cls, var_name):
+        """
+        Get an environment variable or raise an exception if it's not found.
+        
+        Args:
+            var_name (str): Name of the environment variable to retrieve
+            
+        Returns:
+            str: The value of the environment variable
+            
+        Raises:
+            ValueError: If the environment variable is not found
+        """
+        value = cls.get_env(var_name)
+        if value is None:
+            raise ValueError(f"Required environment variable '{var_name}' not found")
+        return value
