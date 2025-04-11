@@ -1,5 +1,7 @@
 # BeagleMind CLI
 
+![BeagleMind Logo](assets/logo.png)
+
 BeagleMind is an intelligent AI assistant specifically tailored for BeagleBoard embedded systems and single-board computing enthusiasts. It combines powerful language models with retrieval-augmented generation (RAG) capabilities to provide knowledgeable, context-aware responses.
 
 > **Note:** This CLI tool is a proof of concept for a BeagleBoard Google Summer of Code (GSoC) project. It aims to deliver and concretize the concept of an AI assistant specifically trained for BeagleBoard systems.
@@ -81,13 +83,17 @@ Before first use, initialize the agent:
 beaglemind init
 ```
 
+![beaglemind init](assets/init.gif)
+
 ### Chat with BeagleMind
 
 Send a prompt to BeagleMind:
 
 ```bash
-beaglemind chat -p "Tell me about BeagleBone Black."
+beaglemind chat -p "Hi, What is BeagleBoard?"
 ```
+
+![beaglemind chat](assets/chat.gif)
 
 ### Continue a Conversation
 
@@ -120,6 +126,8 @@ Quit and clear the agent's state:
 ```bash
 beaglemind quit
 ```
+
+![BeagleMind Logo](assets/quit.gif)
 
 ## Project Structure
 
