@@ -1,6 +1,8 @@
 # BeagleMind CLI
 
-![BeagleMind Logo](beaglemind/assets/logo.png)
+<div align="center">
+  <img src="beaglemind/assets/logo.png" width="100">
+</div>
 
 BeagleMind is an intelligent AI assistant specifically tailored for BeagleBoard embedded systems and single-board computing enthusiasts. It combines powerful language models with retrieval-augmented generation (RAG) capabilities to provide knowledgeable, context-aware responses.
 
@@ -83,7 +85,9 @@ Before first use, initialize the agent:
 beaglemind init
 ```
 
-![beaglemind init](beaglemind/assets/init.gif)
+<div align="center">
+  <img src="beaglemind/assets/init.gif">
+</div>
 
 ### Chat with BeagleMind
 
@@ -93,8 +97,9 @@ Send a prompt to BeagleMind:
 beaglemind chat -p "Hi, What is BeagleBoard?"
 ```
 
-![beaglemind chat](beaglemind/assets/chat.gif)
-
+<div align="center">
+  <img src="beaglemind/assets/chat.gif">
+</div>
 ### Continue a Conversation
 
 Use the thread ID to continue a previous conversation:
@@ -127,7 +132,9 @@ Quit and clear the agent's state:
 beaglemind quit
 ```
 
-![BeagleMind Logo](beaglemind/assets/quit.gif)
+<div align="center">
+  <img src="beaglemind/assets/quit.gif">
+</div>
 
 ## Project Structure
 
