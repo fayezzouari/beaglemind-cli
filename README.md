@@ -83,7 +83,7 @@ Before first use, initialize the agent:
 beaglemind init
 ```
 
-![beaglemind init](assets/init.gif)
+![beaglemind init](beaglemind/assets/init.gif)
 
 ### Chat with BeagleMind
 
@@ -93,7 +93,7 @@ Send a prompt to BeagleMind:
 beaglemind chat -p "Hi, What is BeagleBoard?"
 ```
 
-![beaglemind chat](assets/chat.gif)
+![beaglemind chat](beaglemind/assets/chat.gif)
 
 ### Continue a Conversation
 
@@ -127,7 +127,7 @@ Quit and clear the agent's state:
 beaglemind quit
 ```
 
-![BeagleMind Logo](assets/quit.gif)
+![BeagleMind Logo](beaglemind/assets/quit.gif)
 
 ## Project Structure
 
