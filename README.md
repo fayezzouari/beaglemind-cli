@@ -1,6 +1,6 @@
 # BeagleMind CLI
 
-![BeagleMind Logo](assets/logo.png)
+![BeagleMind Logo](beaglemind/assets/logo.png)
 
 BeagleMind is an intelligent AI assistant specifically tailored for BeagleBoard embedded systems and single-board computing enthusiasts. It combines powerful language models with retrieval-augmented generation (RAG) capabilities to provide knowledgeable, context-aware responses.
 
