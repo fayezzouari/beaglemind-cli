@@ -1,0 +1,758 @@
+
+
+---
+
+Page: https://docs.beagleboard.org/intro/beagle101/
+
+  * [ __](../../index.html)
+  * [Introduction](../index.html)
+  * An Introduction to Beagles
+
+# An Introduction to Beagles#
+
+The most common path to using a Beagle is to use a body of open source
+software. The primary open source targets supported by the BeagleBoard.org
+community are:
+
+  * Getting started with Linux and
+
+  * Getting started with Zephyr.
+
+Many other paths are possible, but, if you donât already have a path, these
+are the ones to typically go down.
+
+If you are new to embedded systems in general, you might consider starting at:
+
+  * Getting started with embedded systems
+
+## Getting started with Linux#
+
+Most Beagles have on-board flash preconfigured to run Linux. These resources
+will get you started quickly.
+
+### Linux Basics#
+
+  * Get started at [Blink an LED](blinkLED.html#blinkled).
+
+  * Learn to reset a board back to factory defaults and dive a bit deeper into the IDE at [Getting Started Guide](../support/getting-started.html#beagleboard-getting-started).
+
+  * Learn a bit about Linux at [Introduction to Linux](linux.html#intro-linux).
+
+  * Learn about accessories at [Accessories](../../accessories/index.html#accessories-home)
+
+  * Learn about using 3rd party I2C add-on boards at [QWIIC, STEMMA and Grove Add-ons in Linux](qwiic-stemma-grove-addons.html#qwiic-stemma-grove-addons).
+
+  * Learn about using mikroBUS add-on boards at [Using mikroBUS](../../boards/beagleplay/demos-and-tutorials/using-mikrobus.html#beagleplay-mikrobus).
+
+  * Learn about using Cape add-on boards at [Capes](../../boards/capes/index.html#capes).
+
+  * Learn about device tree at [Introduction to Device Tree](device-tree.html#intro-device-tree).
+
+  * Read [BeagleBone Cookbook](../../books/beaglebone-cookbook/index.html#bone-cook-book-home).
+
+  * Read [PRU Cookbook](../../books/pru-cookbook/index.html#pru-cookbook-home).
+
+  * Find more books at <https://www.beagleboard.org/books>.
+
+### More on Linux#
+
+  * [Introduction to Buildroot](buildroot.html#intro-buildroot)
+
+  * [Introduction to Debian](debian.html#intro-debian)
+
+## Getting started with Zephyr#
+
+Our Zephyr-enabled boards ship with a build of Micropython and, in the future,
+will also ship with a BeagleConnect Greybus node service for quick,
+transparent access from any BeagleConnect Greybus host enabled system.
+
+### Zephyr Basics#
+
+  * Learn a bit about Zephyr at [Introduction to Zephyr RTOS](zephyr.html#intro-zephyr)
+
+  * See [Using Micropython](../../boards/beagleconnect/freedom/demos-and-tutorials/using-micropython.html#beagleconnect-freedom-using-micropython) to get started quickly.
+
+  * See [Using Zephyr](../../boards/beagleconnect/freedom/demos-and-tutorials/using-zephyr.html#beagleconnect-freedom-using-zephyr) to learn to setup the Zephyr SDK.
+
+  * See [Overview](../../projects/beagleconnect/introduction.html#beagleconnect-overview) to learn about BeagleConnect Greybus.
+
+## Getting started with embedded systems#
+
+An embedded system is a computer designed not to look like a computer. That
+is, it is designed to work like an applicance, doing what you need when you
+need it, rather than sitting around trying to get your attention and begging
+to be told what to do.
+
+An embedded system is built around a computer, but adds additional sensors and
+actuators to do a task, like make toast or get you to work on time along using
+the freeway. We donât typically call these things computers. Instead, we
+call them âtoastersâ or âcarsâ. At the heart of these machines is
+often a programmable computer, though it might not be programmable by _you_.
+
+At BeagleBoard.org, we seek to enable you to make embedded systems of your
+own, rather than relying on other people to make them for you. You could call
+it DIY, or do-it-yourself, but the reality is more DIT, or do-it-together. The
+skills and tools to build an embedded system are very complicated and the
+fundamental manufacturing tools are very expensive, so we need to work
+together to build even the simplest of embedded systems.
+
+Of course, there is nothing wrong with building a dumb toaster, it might even
+be preferred. However, if you are building a smart toaster, you might want it
+to obey you, rather than someone 50,000 km away.
+
+### Embedded Systems Basics#
+
+Here are some basic skills to building an embedded system:
+
+  * [Introduction to C](c.html#intro-c)
+
+  * [Introduction to Assembly Programming](assembly.html#intro-assembly)
+
+  * [Introduction to Verilog](verilog.html#intro-verilog)
+
+### More on Embedded Systems#
+
+Here are some more advanced topics around building an embedded system:
+
+  * [Introduction to Field Programmable Gate Arrays (FPGAs)](fpga.html#intro-fpga)
+
+  * [Introduction to Verification](verification.html#intro-verification)
+
+  * [Introduction to Arm](arm.html#intro-arm)
+
+  * [Introduction to RISC-V](riscv.html#intro-riscv)
+
+  * [Introduction to Wireless Communications](wireless-communications.html#intro-wireless-communications)
+
+[ __ previous Introduction ](../index.html "previous page") [ next Blink an
+LED __](blinkLED.html "next page")
+
+Outstanding todo items
+
+##### Outstanding todo items
+
+__On this page
+
+  * Getting started with Linux
+    * Linux Basics
+    * More on Linux
+  * Getting started with Zephyr
+    * Zephyr Basics
+  * Getting started with embedded systems
+    * Embedded Systems Basics
+    * More on Embedded Systems
+
+[ __Edit on
+OpenBeagle](https://openbeagle.org/docs/docs.beagleboard.io/-/edit/main/intro/beagle101/index.rst)
+
+[ __Show Source](../../_sources/intro/beagle101/index.rst)
+
+__Provide Feedback
+
+##### Feedback
+
+__Issue __Feedback __Idea
+
+Clear & Close [ __Generate OpenBeagle Issue](javascript:void\(0\);)
+
+[ __Discuss on Forum](https://forum.beagleboard.org)
+
+[BeagleBoard.org](https://www.beagleboard.org/) is all about being open,
+please discuss in public on our [forum](https://forum.beagleboard.org)!
+
+
+
+---
+
+Page: https://docs.beagleboard.org/index.html
+
+# BeagleBoard Documentation#
+
+![_images/banner.webp](_images/banner.webp)
+
+Welcome to the [BeagleBoard project
+documentation](https://git.beagleboard.org/docs/docs.beagleboard.io). If you
+are looking for help with your Beagle open-hardware development platform,
+youâve found the right place!
+
+## Introduction#
+
+Get started quickly on our Linux-enabled boards with [Blink an
+LED](intro/beagle101/blinkLED.html#blinkled), follow-up with articles in [An
+Introduction to Beagles](intro/beagle101/index.html#intro-beagle-101), and
+reach out via resources on our [Support](intro/support/index.html#support)
+page as needed to resolve issues and engage with the developer community.
+Donât forget that this is an open-source project! Your contributions are
+welcome. Learn about how to contribute to the BeagleBoard documentation
+project and any of the many open-source Beagle projects ongoing on our
+[Contribution](intro/contribution/index.html#contribution) page.
+
+  * Get started quickly at [Blink an LED](intro/beagle101/blinkLED.html#blinkled).
+
+  * Go a bit deaper at [An Introduction to Beagles](intro/beagle101/index.html#intro-beagle-101).
+
+  * Read the book at [BeagleBone Cookbook](books/beaglebone-cookbook/index.html#bone-cook-book-home).
+
+  * Get help from the community at [Support](intro/support/index.html#support).
+
+  * Learn how to contribute to the project at [Contribution](intro/contribution/index.html#contribution).
+
+## Boards#
+
+This is where you will find the System Reference Manuals (SRMs) for all of the
+boards.
+
+All Beagles are [open-hardware](https://www.oshwa.org/definition/) with
+documentation on the design, including the
+[materials](https://git.beagleboard.org/explore/projects/topics/boards) to
+modify the designs from source using appropriate design tools.
+
+  * Check out our easy-to-use Linux-based board at: [BeaglePlay](boards/beagleplay/index.html#beagleplay-home)
+
+  * Check out our highest performance (8 TOPs) board at: [BeagleBone AI-64](boards/beaglebone/ai-64/index.html#bbai64-home)
+
+  * Check out our first Zephyr-based board at: [BeagleConnect Freedom](boards/beagleconnect/freedom/index.html#beagleconnect-freedom-home)
+
+  * Find all of our boards at: [Boards](boards/index.html#boards)
+
+**BeagleYÂ®-AI**
+
+![_images/beagley-ai.webp](_images/beagley-ai.webp)
+
+An industry standard form-factor 64-bit ARM computer with 4 TOPS AI engine and
+integrated ARM Cortex-R5 for low-latency I/O tasks.
+
+[](boards/beagley/ai/index.html#beagley-ai-home)
+
+**BeaglePlayÂ®**
+
+![_images/beagleplay.webp](_images/beagleplay.webp)
+
+A 64-bit ARM computer designed to simplify physical world interactions to the
+connected world.
+
+[](boards/beagleplay/index.html#beagleplay-home)
+
+**BeagleConnectâ¢ Freedom**
+
+![_images/beagleconnect-freedom.webp](_images/beagleconnect-freedom.webp)
+
+BeagleConnectâ¢ Freedom is based on a [TI Arm Cortex-M4 wireless-enabled
+microcontroller](https://www.ti.com/product/CC1352P7) and is the first
+available BeagleConnectâ¢ solution.
+
+[](boards/beagleconnect/freedom/index.html#beagleconnect-freedom-home)
+
+**BeagleBoneÂ® AI-64**
+
+![_images/beaglebone-ai-64.webp](_images/beaglebone-ai-64.webp)
+
+A complete 64-bit AI and Machine Learning System with the convenience and
+expandability of the BeagleBoneÂ® platform with the peripherals on board to
+get started right away learning and building applications.
+
+[](boards/beaglebone/ai-64/index.html#bbai64-home)
+
+**BeagleVÂ®-Fire**
+
+![_images/beaglev-fire.webp](_images/beaglev-fire.webp)
+
+Awesome quad-core RISC-V and _FPGA_ SBC with BeagleBone cape headers, PCIe
+over M.2 and SYZYGY high-speed connector!
+
+[](boards/beaglev/fire/index.html#beaglev-fire-home)
+
+**BeagleVÂ®-Ahead**
+
+![_images/beaglev-ahead.webp](_images/beaglev-ahead.webp)
+
+High-performance quad-core RISC-V SBC with neural network and media
+accelerators with BeagleBone cape headers, mikroBUS shuttle connector, 2x CSI
+and DSI expansion.
+
+[](boards/beaglev/ahead/index.html#beaglev-ahead-home)
+
+**BeagleBoneÂ® Black**
+
+![_images/beaglebone-black.webp](_images/beaglebone-black.webp)
+
+1GHz Single-Board Linux Computer based on ARM Cortex-A8 with PRU
+microcontrollers and tons of features like Ethernet and HDMI â credit card
+sized with over a decade of support, software and materials behind it making
+it ready for any application.
+
+[](boards/beaglebone/black/index.html#beagleboneblack-home)
+
+**BeagleBoneÂ® AI**
+
+![_images/beaglebone-ai.webp](_images/beaglebone-ai.webp)
+
+Filling the gap between small SBCs and more powerful industrial computers,
+BeagleBoneÂ® AI, based on the AM5729, makes it easy to explore how artificial
+intelligence can be used in every day life. Powerful compute performance and
+software support.
+
+[](boards/beaglebone/ai/index.html#bbai-home)
+
+**PocketBeagleÂ®**
+
+![_images/pocketbeagle.webp](_images/pocketbeagle.webp)
+
+This ultra-tiny-yet-complete open-source USB-key-fob computer has the same
+processor as the BeagleBoneÂ® Black at one third the size. Give small projects
+the Linux computer they deserve. Hundreds of example projects to help you get
+started.
+
+[](boards/pocketbeagle/index.html#pocketbeagle-home)
+
+**BeagleBoneÂ® Blue**
+
+![_images/beaglebone-blue.webp](_images/beaglebone-blue.webp)
+
+An all-in-one Linux-based robotics computer with compatibility to BeagleBoneÂ®
+Black and tons of integration including Wi-Fi, Bluetooth, IMU/barometer, power
+regulation, H-Bridges, motor connectors and more. Robotics made streamlined,
+affordable and fun.
+
+[](boards/beaglebone/blue/index.html#beaglebone-blue-home)
+
+## Capes#
+
+**BeagleBoneÂ® Servo Cape**
+
+![_images/BeagleBoneServoCapeA2_Top_NEW-400x332.png](_images/BeagleBoneServoCapeA2_Top_NEW-400x332.png)
+
+Control up to 16 servos for many remote control, robotics or automation
+projects
+
+**BeagleBoneÂ® Fan Cape**
+
+![_images/fan-cape-400x299.png](_images/fan-cape-400x299.png)
+
+Keeps BeagleBoneÂ® cool under heavy operating loads while still providing easy
+access to the headers. Essential for BeagleBoneÂ® AI Projects
+
+**BeagleBoneÂ® Robotics Cape**
+
+![_images/BBB_RoboticsCape-400x368.png](_images/BBB_RoboticsCape-400x368.png)
+
+Loaded with features needed for mobile robotics supporting movement, sensing,
+power management and communication
+
+**BeagleBoneÂ® Relay Cape**
+
+![_images/BeagleBoneRelayCapeA2-400x274.png](_images/BeagleBoneRelayCapeA2-400x274.png)
+
+Control things like lights, pumps and more in any home automation project
+quickly with 4 relay switches
+
+[](boards/capes/relay.html#bone-cape-relay)
+
+**BeagleBoneÂ® Proto Cape**
+
+![_images/BeagleBoneProtoCapeA2-e1622405187534.png](_images/BeagleBoneProtoCapeA2-e1622405187534.png)
+
+Provides a blank slate including a grid of plated through-holes for external
+components and supportive buttons and LEDs
+
+**BeagleBoneÂ® Power Cape**
+
+![_images/BeagleBonePowerCapeA2-400x285.png](_images/BeagleBonePowerCapeA2-400x285.png)
+
+Provides a complete power interface with regulated 3.3V and 5V out as well as
+up to 30V input voltage
+
+**BeagleBoneÂ® Load Cape**
+
+![_images/BeagleBoneLoadCapeA2-400x290.png](_images/BeagleBoneLoadCapeA2-400x290.png)
+
+Drive high-current loads like relays, motors, solenoids, and high current LEDs
+
+**BeagleBoneÂ® Motor Cape**
+
+![_images/BeagleBoneMotorCapeA2-400x281.png](_images/BeagleBoneMotorCapeA2-400x281.png)
+
+Drive up to 4 DC motors with direction and PWM control
+
+**BeagleBoneÂ® Comms Cape**
+
+![_images/BeagleBoneCommsCapeA2-400x279.png](_images/BeagleBoneCommsCapeA2-400x279.png)
+
+Quickly develop industrial communication applications with an array of
+protocols including RS485 and CAN
+
+**BeagleBoneÂ® GamePup Cape**
+
+![_images/PocketBeagle_GamePup-400x410.png](_images/PocketBeagle_GamePup-400x410.png)
+
+For making a handheld arcade emulator, your own games or otherwise taking your
+PocketBeagle on the go, PocketBeagleÂ® GamePup provides all the features you
+need in a slick shape for gaming
+
+**BeagleBoneÂ® Grove Kit**
+
+![_images/pb-grove-kit-400x267.png](_images/pb-grove-kit-400x267.png)
+
+A complete kit for developing projects with PocketBeagleÂ® and Grove modules.
+Great for teaching embedded processing and Linux development. Comes complete
+with PocketBeagleÂ® as well as Grove Cape and 10 modules to get started.
+
+**BeagleBoneÂ® TechLab Cape**
+
+![_images/PocketBeagle_TechLab-400x212.png](_images/PocketBeagle_TechLab-400x212.png)
+
+Designed with years of educational lessons-learned in mind, PocketBeagleÂ®
+TechLab Cape delivers easy introduction to programming, Linux and even hacking
+the kernel itself. Supported by teaching materials from the Linux Foundation
+and eALE.
+
+## Projects#
+
+A number of software projects, like
+[simpPRU](projects/simppru/index.html#simppru-home) exist to help Beagle
+developers. Some developers choose to host documentation for their
+[Projects](projects/index.html#projects-home) here.
+
+## Books#
+
+This project hosts a collection of open-source [Books](books/index.html#books-
+home) written to help Beagle developers.
+
+  * Find a great introduction to BeagleBone at: [BeagleBone Cookbook](books/beaglebone-cookbook/index.html#bone-cook-book-home)
+
+  * Learn one of the most amazing Beagle features at: [PRU Cookbook](books/pru-cookbook/index.html#pru-cookbook-home)
+
+## Accessories#
+
+This is a list of hardware accessories tested with BeagleBone hardware. The
+list is growing with support of volunteers like you. Checkout the
+[Accessories](accessories/index.html#accessories-home) page for more
+information.
+
+## Indices and tables#
+
+  * [Glossary of Terms](glossary.html#glossary)
+
+  * [Index](genindex.html)
+
+[ next Introduction __](intro/index.html "next page")
+
+
+
+---
+
+Page: https://docs.beagleboard.org/blinkLED.html
+
+  * [ __](/index.html)
+  * Page Not Found (404)
+
+# Page Loading....
+
+Oops! The page you're looking for does not exist.
+
+You can return to the [home page](/index.html).
+
+If you believe this is a broken link, please let us know.
+
+##### Page Moved - Redirecting
+
+We have found the page you are looking for, redirecting in....
+
+5
+
+Cancel Redirect Now
+
+Outstanding todo items
+
+##### Outstanding todo items
+
+__Provide Feedback
+
+##### Feedback
+
+__Issue __Feedback __Idea
+
+Clear & Close [ __Generate OpenBeagle Issue](javascript:void\(0\);)
+
+[ __Discuss on Forum](https://forum.beagleboard.org)
+
+[BeagleBoard.org](https://www.beagleboard.org/) is all about being open,
+please discuss in public on our [forum](https://forum.beagleboard.org)!
+
+
+
+---
+
+Page: https://docs.beagleboard.org/
+
+# BeagleBoard Documentation#
+
+![_images/banner.webp](_images/banner.webp)
+
+Welcome to the [BeagleBoard project
+documentation](https://git.beagleboard.org/docs/docs.beagleboard.io). If you
+are looking for help with your Beagle open-hardware development platform,
+youâve found the right place!
+
+## Introduction#
+
+Get started quickly on our Linux-enabled boards with [Blink an
+LED](intro/beagle101/blinkLED.html#blinkled), follow-up with articles in [An
+Introduction to Beagles](intro/beagle101/index.html#intro-beagle-101), and
+reach out via resources on our [Support](intro/support/index.html#support)
+page as needed to resolve issues and engage with the developer community.
+Donât forget that this is an open-source project! Your contributions are
+welcome. Learn about how to contribute to the BeagleBoard documentation
+project and any of the many open-source Beagle projects ongoing on our
+[Contribution](intro/contribution/index.html#contribution) page.
+
+  * Get started quickly at [Blink an LED](intro/beagle101/blinkLED.html#blinkled).
+
+  * Go a bit deaper at [An Introduction to Beagles](intro/beagle101/index.html#intro-beagle-101).
+
+  * Read the book at [BeagleBone Cookbook](books/beaglebone-cookbook/index.html#bone-cook-book-home).
+
+  * Get help from the community at [Support](intro/support/index.html#support).
+
+  * Learn how to contribute to the project at [Contribution](intro/contribution/index.html#contribution).
+
+## Boards#
+
+This is where you will find the System Reference Manuals (SRMs) for all of the
+boards.
+
+All Beagles are [open-hardware](https://www.oshwa.org/definition/) with
+documentation on the design, including the
+[materials](https://git.beagleboard.org/explore/projects/topics/boards) to
+modify the designs from source using appropriate design tools.
+
+  * Check out our easy-to-use Linux-based board at: [BeaglePlay](boards/beagleplay/index.html#beagleplay-home)
+
+  * Check out our highest performance (8 TOPs) board at: [BeagleBone AI-64](boards/beaglebone/ai-64/index.html#bbai64-home)
+
+  * Check out our first Zephyr-based board at: [BeagleConnect Freedom](boards/beagleconnect/freedom/index.html#beagleconnect-freedom-home)
+
+  * Find all of our boards at: [Boards](boards/index.html#boards)
+
+**BeagleYÂ®-AI**
+
+![_images/beagley-ai.webp](_images/beagley-ai.webp)
+
+An industry standard form-factor 64-bit ARM computer with 4 TOPS AI engine and
+integrated ARM Cortex-R5 for low-latency I/O tasks.
+
+[](boards/beagley/ai/index.html#beagley-ai-home)
+
+**BeaglePlayÂ®**
+
+![_images/beagleplay.webp](_images/beagleplay.webp)
+
+A 64-bit ARM computer designed to simplify physical world interactions to the
+connected world.
+
+[](boards/beagleplay/index.html#beagleplay-home)
+
+**BeagleConnectâ¢ Freedom**
+
+![_images/beagleconnect-freedom.webp](_images/beagleconnect-freedom.webp)
+
+BeagleConnectâ¢ Freedom is based on a [TI Arm Cortex-M4 wireless-enabled
+microcontroller](https://www.ti.com/product/CC1352P7) and is the first
+available BeagleConnectâ¢ solution.
+
+[](boards/beagleconnect/freedom/index.html#beagleconnect-freedom-home)
+
+**BeagleBoneÂ® AI-64**
+
+![_images/beaglebone-ai-64.webp](_images/beaglebone-ai-64.webp)
+
+A complete 64-bit AI and Machine Learning System with the convenience and
+expandability of the BeagleBoneÂ® platform with the peripherals on board to
+get started right away learning and building applications.
+
+[](boards/beaglebone/ai-64/index.html#bbai64-home)
+
+**BeagleVÂ®-Fire**
+
+![_images/beaglev-fire.webp](_images/beaglev-fire.webp)
+
+Awesome quad-core RISC-V and _FPGA_ SBC with BeagleBone cape headers, PCIe
+over M.2 and SYZYGY high-speed connector!
+
+[](boards/beaglev/fire/index.html#beaglev-fire-home)
+
+**BeagleVÂ®-Ahead**
+
+![_images/beaglev-ahead.webp](_images/beaglev-ahead.webp)
+
+High-performance quad-core RISC-V SBC with neural network and media
+accelerators with BeagleBone cape headers, mikroBUS shuttle connector, 2x CSI
+and DSI expansion.
+
+[](boards/beaglev/ahead/index.html#beaglev-ahead-home)
+
+**BeagleBoneÂ® Black**
+
+![_images/beaglebone-black.webp](_images/beaglebone-black.webp)
+
+1GHz Single-Board Linux Computer based on ARM Cortex-A8 with PRU
+microcontrollers and tons of features like Ethernet and HDMI â credit card
+sized with over a decade of support, software and materials behind it making
+it ready for any application.
+
+[](boards/beaglebone/black/index.html#beagleboneblack-home)
+
+**BeagleBoneÂ® AI**
+
+![_images/beaglebone-ai.webp](_images/beaglebone-ai.webp)
+
+Filling the gap between small SBCs and more powerful industrial computers,
+BeagleBoneÂ® AI, based on the AM5729, makes it easy to explore how artificial
+intelligence can be used in every day life. Powerful compute performance and
+software support.
+
+[](boards/beaglebone/ai/index.html#bbai-home)
+
+**PocketBeagleÂ®**
+
+![_images/pocketbeagle.webp](_images/pocketbeagle.webp)
+
+This ultra-tiny-yet-complete open-source USB-key-fob computer has the same
+processor as the BeagleBoneÂ® Black at one third the size. Give small projects
+the Linux computer they deserve. Hundreds of example projects to help you get
+started.
+
+[](boards/pocketbeagle/index.html#pocketbeagle-home)
+
+**BeagleBoneÂ® Blue**
+
+![_images/beaglebone-blue.webp](_images/beaglebone-blue.webp)
+
+An all-in-one Linux-based robotics computer with compatibility to BeagleBoneÂ®
+Black and tons of integration including Wi-Fi, Bluetooth, IMU/barometer, power
+regulation, H-Bridges, motor connectors and more. Robotics made streamlined,
+affordable and fun.
+
+[](boards/beaglebone/blue/index.html#beaglebone-blue-home)
+
+## Capes#
+
+**BeagleBoneÂ® Servo Cape**
+
+![_images/BeagleBoneServoCapeA2_Top_NEW-400x332.png](_images/BeagleBoneServoCapeA2_Top_NEW-400x332.png)
+
+Control up to 16 servos for many remote control, robotics or automation
+projects
+
+**BeagleBoneÂ® Fan Cape**
+
+![_images/fan-cape-400x299.png](_images/fan-cape-400x299.png)
+
+Keeps BeagleBoneÂ® cool under heavy operating loads while still providing easy
+access to the headers. Essential for BeagleBoneÂ® AI Projects
+
+**BeagleBoneÂ® Robotics Cape**
+
+![_images/BBB_RoboticsCape-400x368.png](_images/BBB_RoboticsCape-400x368.png)
+
+Loaded with features needed for mobile robotics supporting movement, sensing,
+power management and communication
+
+**BeagleBoneÂ® Relay Cape**
+
+![_images/BeagleBoneRelayCapeA2-400x274.png](_images/BeagleBoneRelayCapeA2-400x274.png)
+
+Control things like lights, pumps and more in any home automation project
+quickly with 4 relay switches
+
+[](boards/capes/relay.html#bone-cape-relay)
+
+**BeagleBoneÂ® Proto Cape**
+
+![_images/BeagleBoneProtoCapeA2-e1622405187534.png](_images/BeagleBoneProtoCapeA2-e1622405187534.png)
+
+Provides a blank slate including a grid of plated through-holes for external
+components and supportive buttons and LEDs
+
+**BeagleBoneÂ® Power Cape**
+
+![_images/BeagleBonePowerCapeA2-400x285.png](_images/BeagleBonePowerCapeA2-400x285.png)
+
+Provides a complete power interface with regulated 3.3V and 5V out as well as
+up to 30V input voltage
+
+**BeagleBoneÂ® Load Cape**
+
+![_images/BeagleBoneLoadCapeA2-400x290.png](_images/BeagleBoneLoadCapeA2-400x290.png)
+
+Drive high-current loads like relays, motors, solenoids, and high current LEDs
+
+**BeagleBoneÂ® Motor Cape**
+
+![_images/BeagleBoneMotorCapeA2-400x281.png](_images/BeagleBoneMotorCapeA2-400x281.png)
+
+Drive up to 4 DC motors with direction and PWM control
+
+**BeagleBoneÂ® Comms Cape**
+
+![_images/BeagleBoneCommsCapeA2-400x279.png](_images/BeagleBoneCommsCapeA2-400x279.png)
+
+Quickly develop industrial communication applications with an array of
+protocols including RS485 and CAN
+
+**BeagleBoneÂ® GamePup Cape**
+
+![_images/PocketBeagle_GamePup-400x410.png](_images/PocketBeagle_GamePup-400x410.png)
+
+For making a handheld arcade emulator, your own games or otherwise taking your
+PocketBeagle on the go, PocketBeagleÂ® GamePup provides all the features you
+need in a slick shape for gaming
+
+**BeagleBoneÂ® Grove Kit**
+
+![_images/pb-grove-kit-400x267.png](_images/pb-grove-kit-400x267.png)
+
+A complete kit for developing projects with PocketBeagleÂ® and Grove modules.
+Great for teaching embedded processing and Linux development. Comes complete
+with PocketBeagleÂ® as well as Grove Cape and 10 modules to get started.
+
+**BeagleBoneÂ® TechLab Cape**
+
+![_images/PocketBeagle_TechLab-400x212.png](_images/PocketBeagle_TechLab-400x212.png)
+
+Designed with years of educational lessons-learned in mind, PocketBeagleÂ®
+TechLab Cape delivers easy introduction to programming, Linux and even hacking
+the kernel itself. Supported by teaching materials from the Linux Foundation
+and eALE.
+
+## Projects#
+
+A number of software projects, like
+[simpPRU](projects/simppru/index.html#simppru-home) exist to help Beagle
+developers. Some developers choose to host documentation for their
+[Projects](projects/index.html#projects-home) here.
+
+## Books#
+
+This project hosts a collection of open-source [Books](books/index.html#books-
+home) written to help Beagle developers.
+
+  * Find a great introduction to BeagleBone at: [BeagleBone Cookbook](books/beaglebone-cookbook/index.html#bone-cook-book-home)
+
+  * Learn one of the most amazing Beagle features at: [PRU Cookbook](books/pru-cookbook/index.html#pru-cookbook-home)
+
+## Accessories#
+
+This is a list of hardware accessories tested with BeagleBone hardware. The
+list is growing with support of volunteers like you. Checkout the
+[Accessories](accessories/index.html#accessories-home) page for more
+information.
+
+## Indices and tables#
+
+  * [Glossary of Terms](glossary.html#glossary)
+
+  * [Index](genindex.html)
+
+[ next Introduction __](intro/index.html "next page")
+

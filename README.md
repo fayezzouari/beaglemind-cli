@@ -18,6 +18,7 @@ While the current implementation uses third-party LLM providers (Groq), the fina
 
 BeagleMind offers a command-line interface for interacting with an AI assistant that can:
 - Answer questions about BeagleBoard products and embedded systems
+- Generate Python and shell scripts based on user requirements
 - Provide technical guidance and troubleshooting help
 - Maintain conversation context through persistent memory
 - Leverage vector databases for retrieving relevant documentation
@@ -30,7 +31,7 @@ Before installation, ensure you have:
 - Python 3.9 or higher
 - pip (Python package manager)
 - Groq API key (for LLM access)
-- Jina AI API key (for embeddings)
+- Docker with Milvus vector database (for RAG capabilities)
 
 ### Setup Environment
 
@@ -50,10 +51,9 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 ```
 GROQ_API_KEY=your_groq_api_key_here
-JINA_API_KEY=your_jina_api_key_here
 ```
 
-> **Important:** A valid `.env` file with API keys must be present in the directory where you run the BeagleMind CLI.
+> **Important:** A valid `.env` file with a Groq API key must be present in the directory where you run the BeagleMind CLI.
 
 ### Installation Methods
 
@@ -118,60 +118,109 @@ beaglemind chat -p "Debug this error" -l error_log.txt
 
 > **Note:** The logs feature is still under development and maintenance. It may not function optimally in all scenarios.
 
-### Reset or Quit
+### Generate Scripts
 
-Reset the agent's memory:
+BeagleMind can intelligently generate Python and shell scripts based on your requirements. The CLI automatically detects the appropriate script type based on keywords in your prompt, or you can specify it manually.
+
+##### Features:
+- **Automatic script type detection** based on prompt content
+- **Production-ready code** with error handling and best practices
+- **Executable scripts** with proper shebangs and permissions
+- **Comprehensive documentation** with inline comments
+- **File output** with automatic extension handling
+
+##### Auto-detect Script Type
+
+BeagleMind analyzes your prompt and automatically determines whether to generate a Python or shell script:
 
 ```bash
-beaglemind reset
+# This will generate a Python script (detects 'python', 'import', etc.)
+beaglemind generate -g "Create a Python script to read temperature from sensors"
+
+# This will generate a shell script (detects 'bash', 'command', 'terminal', etc.)
+beaglemind generate -g "Create a bash script to install dependencies"
 ```
 
-Quit and clear the agent's state:
+##### Specify Script Type
+
+You can explicitly specify the script type:
 
 ```bash
-beaglemind quit
+# Force Python script generation
+beaglemind generate -g "Create a monitoring tool" --type python
+
+# Force shell script generation  
+beaglemind generate -g "Create a backup utility" --type shell
 ```
 
-<div align="center">
-  <img src="beaglemind/assets/quit.gif">
-</div>
+##### Save to File
 
-## Project Structure
+Generate and save scripts directly to files with automatic extension handling:
 
-```
-beaglemind-cli/
-├── beaglemind/
-│   ├── __init__.py
-│   ├── main.py              # Main CLI implementation
-│   ├── beagleenv.py         # Environment variable management
-│   ├── db_repair.py         # Vector database repair utilities
-│   ├── embedding.py         # Embedding model implementations
-│   ├── .env                    # API keys and configuration (create this)
-│   └── data/
-│       └── vectordb/        # Vector database storage 
-├── requirements.txt        # Package dependencies
-├── setup.py                # Package setup file
-└── README.md               # This documentation
+```bash
+# Save Python script (automatically adds .py extension)
+beaglemind generate -g "Create a GPIO control script" -o gpio_control
+
+# Save shell script (automatically adds .sh extension)
+beaglemind generate -g "Create system setup script" -o setup_system
+
+# Specify full filename
+beaglemind generate -g "Create monitoring script" -o monitor.py
 ```
 
-### API Key Errors
+##### Include Log Context
 
-If you see errors related to missing API keys:
+Include content from log files to help with debugging and script generation:
 
-1. Verify your `.env` file exists in the current directory
-2. Check that both `GROQ_API_KEY` and `JINA_API_KEY` are set correctly
-3. Restart the CLI application after updating the `.env` file
+```bash
+# Generate a script to fix errors found in logs
+beaglemind generate -g "Create a script to fix this error" -l error.log -o fix_error.sh
 
+# Generate diagnostic script based on system logs
+beaglemind generate -g "Create diagnostic script for these issues" -l system.log
+```
 
-## GSoC Project Status
+##### Continue in Conversation Thread
 
-This project is part of a Google Summer of Code initiative for BeagleBoard. Current development focuses on:
+Use thread IDs to continue script development in context:
 
-1. Establishing the RAG architecture with vector databases
-2. Creating an intuitive CLI interface
-3. Laying groundwork for future fine-tuning on BeagleBoard-specific data
-4. Developing the concept for eventual fine-tuned LLM hosting
+```bash
+# Initial script generation
+beaglemind generate -g "Create a backup script" -t my_session
 
-## Contact
+# Modify the script in the same context
+beaglemind generate -g "Add email notifications to the previous script" -t my_session
 
-For questions or issues, please contact Fayez Zouari at fayez.zouari@insat.ucar.tn.
+# Further improvements
+beaglemind generate -g "Add compression and encryption" -t my_session
+```
+
+##### Example Outputs
+
+**Python Script Example:**
+```bash
+beaglemind generate -g "Create a script to monitor BeagleBoard GPIO pins" -o gpio_monitor.py
+```
+
+Generated script features:
+- Proper shebang (`#!/usr/bin/env python3`)
+- Comprehensive imports
+- Error handling with try/except blocks
+- Function definitions and main() pattern
+- Input validation
+- Detailed comments
+- PEP 8 compliance
+
+**Shell Script Example:**
+```bash
+beaglemind generate -g "Create a setup script for BeagleBoard development environment" -o setup_dev.sh
+```
+
+Generated script features:
+- Proper shebang (`#!/bin/bash`)
+- Error handling with `set -e`
+- Variable declarations and quoting
+- Input validation
+- Usage information
+- Exit codes
+- Detailed comments
